@@ -1,6 +1,11 @@
+import 'dart:convert';
+
 import 'package:exercise/DatabaseHelper.dart';
 import 'package:exercise/LoginPage.dart';
+import 'package:exercise/RegisterPage.dart';
+import 'package:exercise/ResponseModel.dart';
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
 
 void main()async{
   await DatabaseHelper.init();
@@ -30,7 +35,8 @@ class MyApp extends StatelessWidget {
           ),
           home:new LoginPage(),
           routes: {
-            '/homePage':(BuildContext context) => homePage()
+            '/homePage':(BuildContext context) => homePage(),
+            '/registerPage':(BuildContext context) => RegisterPage(),
           },
         );
       }else{
@@ -152,6 +158,35 @@ class NavigationIconView{
   }
 
 
+}
+
+
+ResponseModel getFromJson(String result){
+  Map resultMap = json.decode(result);
+  return ResponseModel.fromJson(resultMap);
+}
+
+showError(BuildContext context,String error){
+  showDialog(context: context,builder: (BuildContext context) =>
+  new AlertDialog(
+    content: new Text(error),
+    actions: <Widget>[
+      new FlatButton(onPressed: (){Navigator.pop(context);}, child: new Center(child: const Text('确定')))
+    ],
+  ),
+  );
+}
+
+loginApp(String receiveCookie){
+  cookie = join(cookie+receiveCookie);
+  DatabaseHelper.saveCookie(cookie);
+  runApp(new MaterialApp(
+    title: '共享体育',
+    home:new homePage(),
+    routes: {
+      '/loginPage':(BuildContext context) => LoginPage(),
+    },
+  ));
 }
 
 
