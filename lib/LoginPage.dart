@@ -1,9 +1,13 @@
-import 'package:exercise/LoginModel.dart';
+import 'dart:async';
+
+import 'package:exercise/DatabaseHelper.dart';
 import 'package:exercise/ResponseModel.dart';
 import 'package:exercise/main.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'dart:convert';
+
+import 'package:path/path.dart';
 
 class LoginPage extends StatefulWidget{
   @override
@@ -13,7 +17,7 @@ class LoginPage extends StatefulWidget{
 
 }
 
-String cookie = "";
+
 
 class LoginWidget extends State<LoginPage>{
     final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
@@ -60,14 +64,14 @@ class LoginWidget extends State<LoginPage>{
                                 const SizedBox(height: 64.0,),
                                 new RaisedButton(
                                     onPressed: (){
-                                        doLogin();
+                                        doLogin(context);
                                     },
                                     child: new Text("登录"),
                                     padding: const EdgeInsets.only(left: 120.0,right: 120.0),
                                 ),
                                 const SizedBox(height: 64.0,),
                                 new RaisedButton(
-                                    onPressed: (){doRegister();},
+                                    onPressed: (){doRegister(context);},
                                     child: new Text("注册"),
                                     padding: const EdgeInsets.only(left: 120.0,right: 120.0),
                                 )
@@ -80,15 +84,16 @@ class LoginWidget extends State<LoginPage>{
     }
 
 
-    void doLogin(){
+    Future doLogin(context)async {
         final FormState form = _formKey.currentState;
         print("it's worked!");
         form.save();
         String login = domain + "/login";
-        String post = JSON.encode({"username":email,"password":password});
-        String result;
+        String post = json.encode({"username":email,"password":password});
+        String result = "";
         print(post);
-        http.post(login,body: post,headers: {'Content-Type':'application/json'}).then((response){
+        print("nice!");
+        await http.post(login,body: post,headers: {'Content-Type':'application/json'}).then((response){
             print("Response body : ${response.body}");
             print("Response Code : ${response.statusCode}");
             result = response.body;
@@ -96,13 +101,40 @@ class LoginWidget extends State<LoginPage>{
         print(result);
         Map resultMap = json.decode(result);
         var results = ResponseModel.fromJson(resultMap);
-        print("hello!");
         print("it's the parse result :"+ results.toString());
+        if(results.success == true){
+            cookie = join(cookie+results.data);
+            DatabaseHelper.saveCookie(cookie);
+            runApp(new MaterialApp(
+                title: '共享体育',
+                home:new homePage(),
+                routes: {
+                    '/loginPage':(BuildContext context) => LoginPage(),
+                },
+            ));
+        }else{
+            showDialog(context: context,builder: (BuildContext context) =>
+            new AlertDialog(
+                content: new Text(results.errMessage),
+                actions: <Widget>[
+                    new FlatButton(onPressed: (){Navigator.pop(context);}, child: new Center(child: const Text('确定')))
+                ],
+            ),
+            );
+        }
     }
 
 
-    void doRegister(){
-
+    Future doRegister(context)async {
+        String cookie = await DatabaseHelper.getCookie();
+        showDialog(context: context,builder:(BuildContext context) =>
+        new AlertDialog(
+            content: new Text(cookie),
+            actions: <Widget>[
+                new FlatButton(onPressed: (){Navigator.pop(context);}, child: new Center(child: const Text('确定')))
+            ]
+            ,)
+        );
     }
 
 }

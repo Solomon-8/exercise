@@ -1,30 +1,58 @@
+import 'package:exercise/DatabaseHelper.dart';
 import 'package:exercise/LoginPage.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(new MyApp());
+void main()async{
+  await DatabaseHelper.init();
+  checkFlag = await DatabaseHelper.checkCookie();
+  runApp(new MyApp());
+}
 var domain = "http://106.14.157.233:8888";
+String cookie = "session_id=";
+bool checkFlag;
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-      title: '共享体育',
-      theme: new ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or press Run > Flutter Hot Reload in IntelliJ). Notice that the
-        // counter didn't reset back to zero; the applicatioZn is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home:new LoginPage(),
-      routes: {
-        '/homePage':(BuildContext context) => homePage()
-      },
-    );
+      if(checkFlag){
+        return new MaterialApp(
+          title: '共享体育',
+          theme: new ThemeData(
+            // This is the theme of your application.
+            //
+            // Try running your application with "flutter run". You'll see the
+            // application has a blue toolbar. Then, without quitting the app, try
+            // changing the primarySwatch below to Colors.green and then invoke
+            // "hot reload" (press "r" in the console where you ran "flutter run",
+            // or press Run > Flutter Hot Reload in IntelliJ). Notice that the
+            // counter didn't reset back to zero; the applicatioZn is not restarted.
+            primarySwatch: Colors.blue,
+          ),
+          home:new LoginPage(),
+          routes: {
+            '/homePage':(BuildContext context) => homePage()
+          },
+        );
+      }else{
+        return new MaterialApp(
+          title: '共享体育',
+          theme: new ThemeData(
+            // This is the theme of your application.
+            //
+            // Try running your application with "flutter run". You'll see the
+            // application has a blue toolbar. Then, without quitting the app, try
+            // changing the primarySwatch below to Colors.green and then invoke
+            // "hot reload" (press "r" in the console where you ran "flutter run",
+            // or press Run > Flutter Hot Reload in IntelliJ). Notice that the
+            // counter didn't reset back to zero; the applicatioZn is not restarted.
+            primarySwatch: Colors.blue,
+          ),
+          home:new homePage(),
+          routes: {
+            '/loginPage':(BuildContext context) => LoginPage()
+          },
+        );
+      }
   }
 }
 

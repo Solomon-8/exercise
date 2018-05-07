@@ -23,10 +23,6 @@ class ResponseModel{
         'data':data,
     };
 
-    @override
-    String toString() {
-        return success.toString()+","+errMessage+","+errCode.toString()+","+data;
-    }
 
 
 }
