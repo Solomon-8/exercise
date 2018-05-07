@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:exercise/DatabaseHelper.dart';
-import 'package:exercise/LoginPage.dart';
-import 'package:exercise/RegisterPage.dart';
-import 'package:exercise/ResponseModel.dart';
+import 'package:exercise/utils/DatabaseHelper.dart';
+import 'package:exercise/pages/LoginPage.dart';
+import 'package:exercise/pages/RegisterPage.dart';
+import 'package:exercise/model/ResponseModel.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 

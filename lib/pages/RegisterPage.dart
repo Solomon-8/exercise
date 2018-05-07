@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:exercise/DatabaseHelper.dart';
 import 'package:exercise/main.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +18,6 @@ class RegisterPage extends StatefulWidget{
 
 class RegisterWidget extends State<RegisterPage>{
     final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
-    final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
     final GlobalKey<FormFieldState<String>> _passwordForm = new GlobalKey<FormFieldState<String>>();
     String email;
     String username;

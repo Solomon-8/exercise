@@ -1,12 +1,12 @@
 import 'dart:async';
 
-import 'package:exercise/DatabaseHelper.dart';
+
 import 'package:exercise/main.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'dart:convert';
 
-import 'package:path/path.dart';
+
 
 class LoginPage extends StatefulWidget{
   @override
