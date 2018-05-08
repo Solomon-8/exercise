@@ -13,12 +13,12 @@ class DatabaseHelper{
         String path = join(documentsDirectory.path,"exercise.db");
         _database = await openDatabase(path,version: 1,onCreate: (Database db,int version) async{
            await db.execute(
-               "CREATE TABLE exercise_cookie (id INTEGER PRIMARY KEY,cookie VARCHAR (255) NOT NULL)"
+               "CREATE TABLE exercise_cookie (id INTEGER PRIMARY KEY,cookie VARCHAR (255) NOT NULL,nick VARCHAR (255) NULL)"
            );
         });
     }
-    static saveCookie(String cookie) async{
-        Map<String, dynamic> cookieMap = {"id":"1","cookie":cookie};
+    static saveInfo() async{
+        Map<String, dynamic> cookieMap = {"id":"1","cookie":cookie,"nick":nick};
         List<Map> cookies = await _database.rawQuery("select cookie from exercise_cookie where id = 1");
         if(cookies.isEmpty){
             await _database.insert("exercise_cookie", cookieMap);

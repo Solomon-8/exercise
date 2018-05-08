@@ -32,7 +32,7 @@ class MyWidget extends State<MyPage>{
                                         decoration: new BoxDecoration(shape: BoxShape.circle,image: const DecorationImage(image: const NetworkImage("http://106.14.157.233:8080/jiaoyuPage/zach.jpg"))),
                                     ),
                                     const SizedBox(width: 24.0),
-                                    new Center(child: new Text("我是你爸爸",style: new TextStyle(fontSize: 26.0),))
+                                    new Center(child: new Text(nick,style: new TextStyle(fontSize: 26.0),))
                                 ],
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             ),
@@ -90,7 +90,7 @@ class MyWidget extends State<MyPage>{
   doLogout()async {
       print("press logout.");
       cookie = originCookie;
-      await DatabaseHelper.saveCookie(cookie);
+      await DatabaseHelper.saveInfo();
       runApp(new MaterialApp(
           title: '共享体育',
           home:new LoginPage(),
@@ -174,7 +174,7 @@ class MyWidget extends State<MyPage>{
               print("Response Code : ${response.statusCode}");
               result = response.body;
           });
-          var response = getFromJson(result);
+          var response = getResponseFromJson(result);
           if(response != null && response.success == true){
               shwoSuccess(context,"修改密码成功，你可以使用新密码登录了。");
           }else{

@@ -146,8 +146,9 @@ class RegisterWidget extends State<RegisterPage>{
                 print("Response Code : ${response.statusCode}");
                 result = response.body;
             });
-            var response = getFromJson(result);
+            var response = getResponseFromJson(result);
             if(response != null && response.success == true){
+                getUserInfo();
                 loginApp(response.data);
             }else{
                 showError(context, response.errMessage);

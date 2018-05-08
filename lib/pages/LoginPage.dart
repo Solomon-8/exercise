@@ -100,16 +100,14 @@ class LoginWidget extends State<LoginPage>{
             result = response.body;
         });
         print(result);
-        var results = getFromJson(result);
+        var results = getResponseFromJson(result);
         print("it's the parse result :"+ results.toString());
         if(results.success == true){
+            getUserInfo();
             loginApp(results.data);
         }else{
             showError(context, results.errMessage);
         }
     }
-
-
-
 
 }

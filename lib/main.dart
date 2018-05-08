@@ -8,8 +8,10 @@ import 'package:exercise/utils/DatabaseHelper.dart';
 import 'package:exercise/pages/LoginPage.dart';
 import 'package:exercise/pages/RegisterPage.dart';
 import 'package:exercise/model/ResponseModel.dart';
+import 'package:exercise/model/UserInfoModel.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
+import 'package:http/http.dart' as http;
 
 void main()async{
   await DatabaseHelper.init();
@@ -20,6 +22,7 @@ var domain = "http://106.14.157.233:8888";
 String cookie = "session_id=";
 String originCookie = "session_id=";
 bool checkFlag;
+String nick = "我是你爸爸";
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
@@ -155,9 +158,14 @@ class NavigationIconView{
 }
 
 
-ResponseModel getFromJson(String result){
+ResponseModel getResponseFromJson(String result){
   Map resultMap = json.decode(result);
   return ResponseModel.fromJson(resultMap);
+}
+
+UserInfoModel getUserInfoFromJson(String result){
+  Map resultMap = json.decode(result);
+  return UserInfoModel.fromJson(resultMap);
 }
 
 showError(BuildContext context,String error){
@@ -182,9 +190,23 @@ shwoSuccess(BuildContext context,String content){
   );
 }
 
+getUserInfo() async {
+  String getUserinfo = domain+"/getUserInfo";
+  String result;
+  await http.get(getUserinfo,headers:{'Content-Type':'application/json','cookie':cookie}).then((response){
+    print("Response body : ${response.body}");
+    print("Response Code : ${response.statusCode}");
+    result = response.body;
+  });
+  print(result);
+  var results = getResponseFromJson(result);
+  var userinfo = getUserInfoFromJson(results.data);
+  nick = userinfo.nick;
+}
+
 loginApp(String receiveCookie){
   cookie = join(cookie+receiveCookie);
-  DatabaseHelper.saveCookie(cookie);
+  DatabaseHelper.saveInfo();
   runApp(new MaterialApp(
     title: '共享体育',
     home:new homePage(),
@@ -194,5 +216,7 @@ loginApp(String receiveCookie){
     },
   ));
 }
+
+
 
 
