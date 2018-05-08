@@ -199,7 +199,7 @@ getUserInfo() async {
   });
   print(result);
   var results = getResponseFromJson(result);
-  var userinfo = getUserInfoFromJson(results.data);
+  var userinfo = UserInfoModel.fromJson(results.data);
   nick = userinfo.nick;
 }
 

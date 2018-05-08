@@ -34,7 +34,7 @@ class MyWidget extends State<MyPage>{
                                     const SizedBox(width: 24.0),
                                     new Center(child: new Text(nick,style: new TextStyle(fontSize: 26.0),))
                                 ],
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
                             ),
                             decoration: new BoxDecoration(border: new Border(bottom: const BorderSide(color: Colors.black12,))),
                             height: 120.0,
