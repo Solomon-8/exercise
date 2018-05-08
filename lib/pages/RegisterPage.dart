@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:exercise/main.dart';
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
 
 
 
@@ -148,8 +149,9 @@ class RegisterWidget extends State<RegisterPage>{
             });
             var response = getResponseFromJson(result);
             if(response != null && response.success == true){
-                getUserInfo();
-                loginApp(response.data);
+                cookie = join(cookie+response.data);
+                await getUserInfo();
+                loginApp();
             }else{
                 showError(context, response.errMessage);
             }

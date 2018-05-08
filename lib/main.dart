@@ -10,7 +10,6 @@ import 'package:exercise/pages/RegisterPage.dart';
 import 'package:exercise/model/ResponseModel.dart';
 import 'package:exercise/model/UserInfoModel.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
 import 'package:http/http.dart' as http;
 
 void main()async{
@@ -204,8 +203,7 @@ getUserInfo() async {
   nick = userinfo.nick;
 }
 
-loginApp(String receiveCookie){
-  cookie = join(cookie+receiveCookie);
+loginApp(){
   DatabaseHelper.saveInfo();
   runApp(new MaterialApp(
     title: '共享体育',

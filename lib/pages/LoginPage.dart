@@ -6,6 +6,8 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'dart:convert';
 
+import 'package:path/path.dart';
+
 
 
 class LoginPage extends StatefulWidget{
@@ -103,8 +105,9 @@ class LoginWidget extends State<LoginPage>{
         var results = getResponseFromJson(result);
         print("it's the parse result :"+ results.toString());
         if(results.success == true){
-            getUserInfo();
-            loginApp(results.data);
+            cookie = join(cookie+results.data);
+            await getUserInfo();
+            loginApp();
         }else{
             showError(context, results.errMessage);
         }
