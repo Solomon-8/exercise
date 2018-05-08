@@ -1,10 +1,10 @@
 
 
 class ResponseModel{
-    final bool success;
-    final String errMessage;
-    final int errCode;
-    final String data;
+    bool success;
+    String errMessage;
+    int errCode;
+    var data;
 
     ResponseModel(this.success, this.errMessage, this.errCode, this.data);
 

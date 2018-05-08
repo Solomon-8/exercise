@@ -22,10 +22,12 @@ class DatabaseHelper{
         List<Map> cookies = await _database.rawQuery("select cookie from exercise_cookie where id = 1");
         if(cookies.isEmpty){
             await _database.insert("exercise_cookie", cookieMap);
+            print("saved.insert");
         }else{
             await _database.update("exercise_cookie", cookieMap,where: "id=1");
+            print("saved.update");
         }
-        print("saved.1");
+        print("saved.null");
     }
 
     static Future<String> getCookie() async {
@@ -38,8 +40,13 @@ class DatabaseHelper{
         if(cookies.isEmpty){
             return true;
         }else{
-            cookie = cookies[0]['cookie'];
-            return false;
+            var temp = cookies[0]['cookie'];
+            if(temp == originCookie){
+                return true;
+            }else{
+                cookie = temp;
+                return false;
+            }
         }
     }
 

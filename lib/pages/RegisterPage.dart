@@ -65,7 +65,7 @@ class RegisterWidget extends State<RegisterPage>{
                                     icon: const Text("    密    码"),
                                     hintText: '请输入至少5位密码',
                                 ),
-                                validator: _validatePassword,
+                                validator: validatePassword,
                                 key: _passwordForm,
                                 onSaved: (String value){
                                     password = value;
@@ -115,15 +115,6 @@ class RegisterWidget extends State<RegisterPage>{
         );
     }
 
-    String _validatePassword(String value){
-        if(value.isEmpty){
-            return "请输入密码";
-        }else if(value.length < 5){
-            return "至少输入5位数的密码";
-        }else{
-            return null;
-        }
-    }
 
     String _validateRetryPassword(String value){
         final FormFieldState<String> formState = _passwordForm.currentState;
@@ -164,3 +155,14 @@ class RegisterWidget extends State<RegisterPage>{
         }
     }
 }
+
+String validatePassword(String value){
+    if(value.isEmpty){
+        return "请输入密码";
+    }else if(value.length < 5){
+        return "至少输入5位数的密码";
+    }else{
+        return null;
+    }
+}
+

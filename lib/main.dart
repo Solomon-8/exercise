@@ -1,5 +1,9 @@
 import 'dart:convert';
 
+import 'package:exercise/pages/ActivitiesRecorderPage.dart';
+import 'package:exercise/pages/ActivityPage.dart';
+import 'package:exercise/pages/AddActivityPage.dart';
+import 'package:exercise/pages/MyPage.dart';
 import 'package:exercise/utils/DatabaseHelper.dart';
 import 'package:exercise/pages/LoginPage.dart';
 import 'package:exercise/pages/RegisterPage.dart';
@@ -14,6 +18,7 @@ void main()async{
 }
 var domain = "http://106.14.157.233:8888";
 String cookie = "session_id=";
+String originCookie = "session_id=";
 bool checkFlag;
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -22,17 +27,6 @@ class MyApp extends StatelessWidget {
       if(checkFlag){
         return new MaterialApp(
           title: '共享体育',
-          theme: new ThemeData(
-            // This is the theme of your application.
-            //
-            // Try running your application with "flutter run". You'll see the
-            // application has a blue toolbar. Then, without quitting the app, try
-            // changing the primarySwatch below to Colors.green and then invoke
-            // "hot reload" (press "r" in the console where you ran "flutter run",
-            // or press Run > Flutter Hot Reload in IntelliJ). Notice that the
-            // counter didn't reset back to zero; the applicatioZn is not restarted.
-            primarySwatch: Colors.blue,
-          ),
           home:new LoginPage(),
           routes: {
             '/homePage':(BuildContext context) => homePage(),
@@ -42,20 +36,10 @@ class MyApp extends StatelessWidget {
       }else{
         return new MaterialApp(
           title: '共享体育',
-          theme: new ThemeData(
-            // This is the theme of your application.
-            //
-            // Try running your application with "flutter run". You'll see the
-            // application has a blue toolbar. Then, without quitting the app, try
-            // changing the primarySwatch below to Colors.green and then invoke
-            // "hot reload" (press "r" in the console where you ran "flutter run",
-            // or press Run > Flutter Hot Reload in IntelliJ). Notice that the
-            // counter didn't reset back to zero; the applicatioZn is not restarted.
-            primarySwatch: Colors.blue,
-          ),
           home:new homePage(),
           routes: {
-            '/loginPage':(BuildContext context) => LoginPage()
+            '/loginPage':(BuildContext context) => LoginPage(),
+            '/activitiesRecorder':(BuildContext context) => ActivitiesRecorderPage(),
           },
         );
       }
@@ -119,7 +103,7 @@ class _homePageState extends State<homePage> with TickerProviderStateMixin{
 
     return new Scaffold(
       appBar: getAppBar(_currentIndex),
-      body: new Center(child: new Text("Hello")),
+      body: getBody(_currentIndex),
       bottomNavigationBar: bottomNavigationBar,
     );
   }
@@ -131,6 +115,16 @@ class _homePageState extends State<homePage> with TickerProviderStateMixin{
       return new AppBar(title: new Center(child: new Text("发布"),),);
     }else{
       return new AppBar(title: new Center(child: new Text("我的"),),);
+    }
+  }
+
+  Widget getBody(int index){
+    if(index == 0){
+      return new ActivityPage();
+    }else if(index == 1){
+      return new AddActivityPage();
+    }else{
+      return new MyPage();
     }
   }
 
@@ -177,6 +171,17 @@ showError(BuildContext context,String error){
   );
 }
 
+shwoSuccess(BuildContext context,String content){
+  showDialog(context: context,builder: (BuildContext context) =>
+  new AlertDialog(
+    content: new Text(content),
+    actions: <Widget>[
+      new FlatButton(onPressed: (){Navigator.pop(context);}, child: new Center(child: const Text('确定')))
+    ],
+  ),
+  );
+}
+
 loginApp(String receiveCookie){
   cookie = join(cookie+receiveCookie);
   DatabaseHelper.saveCookie(cookie);
@@ -185,6 +190,7 @@ loginApp(String receiveCookie){
     home:new homePage(),
     routes: {
       '/loginPage':(BuildContext context) => LoginPage(),
+      '/activitiesRecorder':(BuildContext context) => ActivitiesRecorderPage(),
     },
   ));
 }
