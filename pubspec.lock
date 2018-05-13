@@ -14,21 +14,14 @@ packages:
       name: args
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.4.1"
+    version: "1.4.3"
   async:
     dependency: transitive
     description:
       name: async
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.0.6"
-  barback:
-    dependency: transitive
-    description:
-      name: barback
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.15.2+14"
+    version: "2.0.7"
   boolean_selector:
     dependency: transitive
     description:
@@ -119,14 +112,14 @@ packages:
       name: crypto
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.0.2+1"
+    version: "2.0.3"
   csslib:
     dependency: transitive
     description:
       name: csslib
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.14.1"
+    version: "0.14.4"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -134,13 +127,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.1.2"
-  dart_internal:
-    dependency: transitive
-    description:
-      name: dart_internal
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.1.1"
   dart_style:
     dependency: transitive
     description:
@@ -220,7 +206,7 @@ packages:
       name: http_parser
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "3.1.1"
+    version: "3.1.2"
   intl:
     dependency: "direct main"
     description:
@@ -235,13 +221,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.3.2+1"
-  isolate:
-    dependency: transitive
-    description:
-      name: isolate
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "1.1.0"
   js:
     dependency: transitive
     description:
@@ -283,14 +262,14 @@ packages:
       name: matcher
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.12.1+4"
+    version: "0.12.2+1"
   meta:
     dependency: transitive
     description:
       name: meta
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.1.2"
+    version: "1.1.5"
   mime:
     dependency: transitive
     description:
@@ -318,14 +297,14 @@ packages:
       name: node_preamble
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.4.0"
+    version: "1.4.1"
   observable:
     dependency: transitive
     description:
       name: observable
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.22.1+1"
+    version: "0.14.0+1"
   package_config:
     dependency: transitive
     description:
@@ -374,21 +353,21 @@ packages:
       name: pub_semver
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.3.2"
+    version: "1.4.1"
   quiver:
     dependency: transitive
     description:
       name: quiver
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.28.0"
+    version: "0.29.0+1"
   shelf:
     dependency: transitive
     description:
       name: shelf
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.7.2"
+    version: "0.7.3"
   shelf_packages_handler:
     dependency: transitive
     description:
@@ -435,7 +414,7 @@ packages:
       name: source_maps
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.10.4"
+    version: "0.10.5"
   source_span:
     dependency: transitive
     description:
@@ -463,7 +442,7 @@ packages:
       name: stream_channel
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.6.4"
+    version: "1.6.6"
   stream_transform:
     dependency: transitive
     description:
@@ -498,7 +477,7 @@ packages:
       name: test
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.12.32+2"
+    version: "0.12.37"
   typed_data:
     dependency: transitive
     description:
@@ -520,13 +499,20 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.9.0+4"
+  uuid:
+    dependency: "direct main"
+    description:
+      name: uuid
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.0"
   vector_math:
     dependency: transitive
     description:
       name: vector_math
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.0.5"
+    version: "2.0.6"
   watcher:
     dependency: transitive
     description:
@@ -549,5 +535,5 @@ packages:
     source: hosted
     version: "2.1.13"
 sdks:
-  dart: ">=2.0.0-dev.35 <=2.0.0-edge.3c4dccbd46f152be9e1b6ca95c57357e8e48057c"
+  dart: ">=2.0.0-dev.52.0 <=2.0.0-dev.54.0.flutter-46ab040e58"
   flutter: ">=0.1.4 <2.0.0"
