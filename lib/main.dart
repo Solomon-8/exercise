@@ -1,5 +1,8 @@
 import 'dart:convert';
 
+import 'package:exercise/model/ActivityModel.dart';
+import 'package:exercise/model/MessageModel.dart';
+import 'package:exercise/model/UserActivityModel.dart';
 import 'package:exercise/pages/ActivitiesRecorderPage.dart';
 import 'package:exercise/pages/ActivityPage.dart';
 import 'package:exercise/pages/AddActivityPage.dart';
@@ -11,6 +14,7 @@ import 'package:exercise/model/ResponseModel.dart';
 import 'package:exercise/model/UserInfoModel.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:uuid/uuid.dart';
 
 void main()async{
   await DatabaseHelper.init();
@@ -167,6 +171,22 @@ UserInfoModel getUserInfoFromJson(String result){
   return UserInfoModel.fromJson(resultMap);
 }
 
+List<ActivityModel> getActivityFromJson(List resultMap){
+    List<ActivityModel> resultList = new List();
+    for(int i=0 ; i < resultMap.length ; i++){
+        resultList.add(ActivityModel.fromJson(resultMap[i]));
+    }
+    return resultList;
+}
+
+List<UserActivityModel> getUserActivityFromJson(List resultMap){
+    List<UserActivityModel> resultList = new List();
+    for(int i=0 ; i < resultMap.length ; i++){
+        resultList.add(UserActivityModel.fromJson(resultMap[i]));
+    }
+    return resultList;
+}
+
 showError(BuildContext context,String error){
   showDialog(context: context,builder: (BuildContext context) =>
   new AlertDialog(
@@ -187,6 +207,51 @@ shwoSuccess(BuildContext context,String content){
     ],
   ),
   );
+}
+
+showInput(BuildContext context,String activityId) async{
+    String content;
+    final GlobalKey<FormState> _inputForm = new GlobalKey<FormState>();
+    showDialog(context: context,builder: (BuildContext context) =>
+      new AlertDialog(
+          content: new Form(
+              key: _inputForm,
+              child: new TextFormField(
+                  decoration: const InputDecoration(
+                      border: const UnderlineInputBorder(),
+                      hintText: '请输入您的留言',
+                  ),
+                  onSaved: (String value){
+                      content = value;
+                  },
+                  keyboardType: TextInputType.phone,
+              )
+          ),
+          actions: <Widget>[
+              new FlatButton(onPressed: ()async {
+                  final FormState formState = _inputForm.currentState;
+                  formState.save();
+                  var uuid = new Uuid();
+                  String leaveMessage = domain + "/addMessage";
+                  MessageModel messageModel = new MessageModel(content,activityId,uuid.v1());
+                  String post = json.encode(messageModel);
+                  print(post);
+                  String result;
+                  await http.post(leaveMessage,body: post,headers: {'Content-Type':'application/json','cookie':cookie}).then((response){
+                      print("Response body : ${response.body}");
+                      print("Response Code : ${response.statusCode}");
+                      result = response.body;
+                  });
+                  var response = getResponseFromJson(result);
+                  if(response.success == true){
+                      shwoSuccess(context, "留言成功");
+                  }else{
+                      showError(context, response.errMessage);
+                  }
+              }, child: new Center(child: const Text('确定')))
+          ],
+      )
+    );
 }
 
 getUserInfo() async {
