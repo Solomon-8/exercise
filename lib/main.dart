@@ -19,8 +19,10 @@ import 'package:uuid/uuid.dart';
 void main()async{
   await DatabaseHelper.init();
   checkFlag = await DatabaseHelper.checkCookie();
+  await getActivities();
   runApp(new MyApp());
 }
+List<ActivityItem> items = new List();
 var domain = "http://106.14.157.233:8888";
 String cookie = "session_id=";
 String originCookie = "session_id=";

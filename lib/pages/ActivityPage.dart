@@ -24,8 +24,8 @@ class ActivityWidget extends State<StatefulWidget>{
             body: new ListView.builder(
                 padding: new EdgeInsets.all(8.0),
                 itemBuilder: (BuildContext context, int index) {
-                    if(_items.length > index){
-                        return _items[index];
+                    if(items.length > index){
+                        return items[index];
                     }
                 },
             )
@@ -170,10 +170,9 @@ getActivities()async{
         List<ActivityModel> activities = getActivityFromJson(response.data);
         for(ActivityModel i in activities){
             ActivityItem activityItem = new ActivityItem(i.name, new DateFormat.MMMd().format(i.date), i.place,i.activityId);
-            if(!_items.contains(activityItem)){
-                _items.add(activityItem);
+            if(!items.contains(activityItem)){
+                items.add(activityItem);
             }
         }
     }
 }
-List<ActivityItem> _items = new List();
