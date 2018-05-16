@@ -16,7 +16,7 @@ class MessageModel{
     MessageModel.fromJson(Map<String, dynamic> json):
                 this.content = json['content'],
                 this.activityId = json['activityId'],
-                this.time = new DateTime.fromMicrosecondsSinceEpoch((json['time']/1000).round()),
+                this.time = new DateTime.fromMillisecondsSinceEpoch(json['time']),
                 this.messageId = json['messageId'];
 
 

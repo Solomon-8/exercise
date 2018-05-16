@@ -55,7 +55,7 @@ class MyWidget extends State<MyPage>{
                                         decoration: new BoxDecoration(border: new Border(top: const BorderSide(color: Colors.black12,),bottom: const BorderSide(color: Colors.black12,))),
                                         padding: const EdgeInsets.only(left: 15.0,right: 15.0),
                                     ),
-                                    onTap: (){print("Hello World");getOwnActivities();showActivities(context);},
+                                    onTap: (){print("Hello World");showActivities(context);},
                                 ),
                                 const SizedBox(height: 15.0,),
                                 new GestureDetector(
@@ -102,8 +102,9 @@ class MyWidget extends State<MyPage>{
       ));
   }
 
-  showActivities(BuildContext context){
-        Navigator.of(context).pushNamed('/activitiesRecorder');
+  showActivities(BuildContext context)async {
+      await getOwnActivities();
+      Navigator.of(context).pushNamed('/activitiesRecorder');
   }
   final GlobalKey<FormState> _modifyKey = new GlobalKey<FormState>();
   String password;

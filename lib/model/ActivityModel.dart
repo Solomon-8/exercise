@@ -20,7 +20,7 @@ class ActivityModel{
     ActivityModel.fromJson(Map<String, dynamic> json):
                 this.name = json['name'],
                 this.activityId = json['activityId'],
-                this.date = new DateTime.fromMicrosecondsSinceEpoch((json['date']/1000).round()),
+                this.date = new DateTime.fromMillisecondsSinceEpoch(json['date']),
                 this.place = json['place'],
                 this.peopleNum = json['peopleNum']
     ;

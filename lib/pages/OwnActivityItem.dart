@@ -104,11 +104,14 @@ class OwnActivityItem extends StatelessWidget{
             result = response.body;
         });
         var response = getResponseFromJson(result);
-        String content = "";
+        String content = "这个活动的留言有:\n";
         if(response.success == true){
-            List<MessageModel> model = response.data;
+            List<MessageModel> model = new List();
+            for (int i = 0; i < response.data.length; ++i) {
+                model.add(MessageModel.fromJson(response.data[i]));
+            }
             for(MessageModel i in model){
-                context += i.content+"\n";
+                content += i.content+"\n";
             }
             shwoSuccess(context, content);
         }else{

@@ -48,7 +48,9 @@ getActivities()async{
     if(response.success == true){
         List<ActivityModel> activities = getActivityFromJson(response.data);
         for(ActivityModel i in activities){
-            ActivityItem activityItem = new ActivityItem(i.name, new DateFormat.MMMd().format(i.date), i.place,i.activityId);
+            String temp = new DateFormat.yMd().add_Hm().format(i.date);
+            print(temp);
+            ActivityItem activityItem = new ActivityItem(i.name,temp, i.place,i.activityId);
             if(!items.contains(activityItem)){
                 items.add(activityItem);
             }

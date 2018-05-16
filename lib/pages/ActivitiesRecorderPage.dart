@@ -47,7 +47,7 @@ getOwnActivities()async{
     if(response.success == true){
         List<ActivityModel> activities = getActivityFromJson(response.data);
         for(ActivityModel i in activities){
-            OwnActivityItem activityItem = new OwnActivityItem(i.name, new DateFormat.MMMd().format(i.date), i.place,i.activityId);
+            OwnActivityItem activityItem = new OwnActivityItem(i.name, new DateFormat.yMd().add_Hm().format(i.date), i.place,i.activityId);
             if(!ownItems.contains(activityItem)){
                 ownItems.add(activityItem);
             }
