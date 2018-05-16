@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:exercise/pages/ActivitiesRecorderPage.dart';
 import 'package:http/http.dart' as http;
 import 'package:exercise/main.dart';
 import 'package:exercise/utils/DatabaseHelper.dart';
@@ -54,7 +55,7 @@ class MyWidget extends State<MyPage>{
                                         decoration: new BoxDecoration(border: new Border(top: const BorderSide(color: Colors.black12,),bottom: const BorderSide(color: Colors.black12,))),
                                         padding: const EdgeInsets.only(left: 15.0,right: 15.0),
                                     ),
-                                    onTap: (){print("Hello World");showActivities(context);},
+                                    onTap: (){print("Hello World");getOwnActivities();showActivities(context);},
                                 ),
                                 const SizedBox(height: 15.0,),
                                 new GestureDetector(

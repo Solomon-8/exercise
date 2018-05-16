@@ -4,9 +4,11 @@ import 'package:exercise/model/ActivityModel.dart';
 import 'package:exercise/model/MessageModel.dart';
 import 'package:exercise/model/UserActivityModel.dart';
 import 'package:exercise/pages/ActivitiesRecorderPage.dart';
+import 'package:exercise/pages/ActivityItem.dart';
 import 'package:exercise/pages/ActivityPage.dart';
 import 'package:exercise/pages/AddActivityPage.dart';
 import 'package:exercise/pages/MyPage.dart';
+import 'package:exercise/pages/OwnActivityItem.dart';
 import 'package:exercise/utils/DatabaseHelper.dart';
 import 'package:exercise/pages/LoginPage.dart';
 import 'package:exercise/pages/RegisterPage.dart';
@@ -22,6 +24,7 @@ void main()async{
   await getActivities();
   runApp(new MyApp());
 }
+List<OwnActivityItem> ownItems = new List();
 List<ActivityItem> items = new List();
 var domain = "http://106.14.157.233:8888";
 String cookie = "session_id=";
